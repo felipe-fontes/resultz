@@ -1,7 +1,7 @@
 name: resultz
 description: The Results Dart package provides a simple and type-safe way to handle results in your Dart and Flutter applications. It allows you to represent the outcome of an operation as either an error or a success and provides convenient methods for working with these results.
-version: 1.0.0
-homepage: https://github.com/felipe-fontes/results
+version: 1.0.1
+homepage: https://github.com/felipe-fontes/resultz
 
 environment:
   sdk: ">=3.1.0 <4.0.0"

@@ -1,13 +1,13 @@
-# Results Dart Package
+# Resultz Dart Package
 
-The Results Dart package provides a simple and type-safe way to handle results in your Dart and Flutter applications. It allows you to represent the outcome of an operation as either an error or a success and provides convenient methods for working with these results.
+The Resultz Dart package provides a simple and type-safe way to handle results in your Dart and Flutter applications. It allows you to represent the outcome of an operation as either an error or a success and provides convenient methods for working with these results.
 
 Installation
-To use this package, add results as a dependency in your pubspec.yaml file:
+To use this package, add resultz as a dependency in your pubspec.yaml file:
 
 ```yaml
 dependencies:
-  results: ^1.0.0 # Use the latest version from pub.dev
+  resultz: ^1.0.0 # Use the latest version from pub.dev
 ```
 Then, run flutter pub get to fetch the package.
 
@@ -15,11 +15,23 @@ Then, run flutter pub get to fetch the package.
 
 ### Creating and Handling Results
 
-Results are represented as `Results<ERR, OK>`, where ERR is the error type and OK is the success type. You can create results using Err for errors and Ok for successes.
+Results are represented as `Result<ERR, OK>`, where ERR is the error type and OK is the success type. You can create results using Err for errors and Ok for successes.
 
 ```dart
-final result = Ok<int, String>('Success');
-final errorResult = Err<int, String>(42);
+Future<Result<AddTaskError, Task>> addTask(Task task) async {
+  try {
+    
+    if (task.title.isEmpty) {
+        return Err(AddTaskError('Title cannot be empty'));
+    }
+
+    // Add task to database
+
+    return Ok(task);
+  } catch (e) {
+    return Err(AddTaskError('Failed to add task'));
+  }
+}
 ```
 
 ### Checking Result Type
@@ -95,9 +107,9 @@ result.check
 
 By specifying the type in `ifErr` and `ifOk`, you can ensure that you are handling the correct error or success types, providing type safety in your code.
 
-### Mapping Results
+### Mapping Result
 
-You can transform results using the `map` and `mapFuture` methods:
+You can transform result using the `map` and `mapFuture` methods:
 
 ```dart
 final transformedResult = result.map(
